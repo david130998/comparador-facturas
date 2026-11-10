@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparador de facturas</title>
+  <link rel="stylesheet" href="estilo.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>💡 Comparador de facturas</h1>
+    <p>Sube tu factura de luz o gas en PDF, compárala con otras ofertas y pide a tu compañía que te la mejore.</p>
+  </header>
+
+  <main>
+    <!-- PASO 1 -->
+    <section class="tarjeta">
+      <h2>1. Sube tu factura (PDF)</h2>
+      <input type="file" id="pdf" accept="application/pdf">
+      <p class="nota">El PDF se lee en tu navegador. No se envía a ningún sitio.</p>
+      <p id="estadoPdf" class="nota"></p>
+      <details>
+        <summary>Ver el texto que se ha leído del PDF</summary>
+        <pre id="textoPdf"></pre>
+      </details>
+    </section>
+
+    <!-- PASO 2 -->
+    <section class="tarjeta">
+      <h2>2. Revisa los datos</h2>
+      <p class="nota">Rellenados automáticamente si se encuentran. Corrige lo que no cuadre con tu factura.</p>
+      <div class="fila">
+        <label>Tipo
+          <select id="tipo">
+            <option value="luz">Luz</option>
+            <option value="gas">Gas</option>
+          </select>
+        </label>
+        <label>Compañía actual <input id="compania" type="text"></label>
+      </div>
+      <div class="fila">
+        <label>Días facturados <input id="dias" type="number" step="1"></label>
+        <label>Consumo total (kWh) <input id="kwh" type="number" step="0.01"></label>
+        <label>Importe total (€) <input id="total" type="number" step="0.01"></label>
+      </div>
+      <div class="fila solo-luz">
+        <label>Potencia contratada (kW) <input id="potencia" type="number" step="0.01"></label>
+        <label>kWh punta <input id="punta" type="number" step="0.01"></label>
+        <label>kWh llano <input id="llano" type="number" step="0.01"></label>
+        <label>kWh valle <input id="valle" type="number" step="0.01"></label>
+      </div>
+      <p class="nota solo-luz">Si tu factura no separa punta, llano y valle, déjalos vacíos: se reparte el total como un hogar típico (30 % punta, 25 % llano, 45 % valle).</p>
+      <div class="fila solo-gas" hidden>
+        <label>Tarifa de acceso (RL)
+          <select id="rl">
+            <option value="RL1">RL.1 (hasta 5.000 kWh/año)</option>
+            <option value="RL2">RL.2 (5.000 a 15.000 kWh/año)</option>
+            <option value="RL3">RL.3 (15.000 a 50.000 kWh/año)</option>
+          </select>
+        </label>
+      </div>
+      <button id="comparar">Comparar ofertas</button>
+    </section>
+
+    <!-- PASO 3 -->
+    <section class="tarjeta" id="resultado" hidden>
+      <h2>3. Resultado</h2>
+      <div id="resumen"></div>
+      <table>
+        <thead>
+          <tr><th>Compañía / oferta</th><th>Esta factura</th><th>Al año</th><th>Ahorro/año</th></tr>
+        </thead>
+        <tbody id="tabla"></tbody>
+      </table>
+      <p class="nota" id="avisoOfertas"></p>
+    </section>
+
+    <!-- PASO 4 -->
+    <section class="tarjeta" id="mejora" hidden>
+      <h2>4. Pide que te mejoren la oferta</h2>
+      <p class="nota">Mensaje listo para enviar a tu compañía actual (chat, email o teléfono). Si no te igualan, puedes cambiarte a la oferta más barata.</p>
+      <textarea id="mensaje" rows="12"></textarea>
+      <button id="copiar">Copiar mensaje</button>
+    </section>
+
+    <!-- OFERTAS -->
+    <section class="tarjeta">
+      <h2>Ofertas que se comparan</h2>
+      <p class="nota">Los precios están en <code>ofertas.json</code>. Revísalos de vez en cuando en el
+        <a href="https://comparador.cnmc.gob.es/" target="_blank" rel="noopener">comparador oficial de la CNMC</a>
+        o en la web de cada compañía, y cámbialos ahí.</p>
+      <div id="listaOfertas"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

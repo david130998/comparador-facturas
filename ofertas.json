@@ -1,0 +1,31 @@
+{
+  "actualizado": "2026-11-02",
+  "fuente": "Comparador CNMC, citado por Xataka Home el 2026-11-02 (5 kW, 400 kWh/mes)",
+  "luz": [
+    {
+      "compania": "Chc Energía",
+      "nombre": "Plan Estrella Dúo",
+      "energia": { "punta": 0.139, "llano": 0.139, "valle": 0.139 },
+      "potencia_kw_anio": { "punta": 28.522718, "valle": 21.877282 },
+      "nota": "Descuento de 9,99 €/mes los 5 primeros meses (no incluido en el cálculo)",
+      "web": "https://www.chcenergia.es/luz/plan-estrella-duo"
+    },
+    {
+      "compania": "Energía Nufri",
+      "nombre": "Tarifa 3 Precios",
+      "energia": { "punta": 0.187452, "llano": 0.10868, "valle": 0.074539 },
+      "potencia_kw_anio": { "punta": 30.70453, "valle": 30.725335 },
+      "nota": "Solo nuevos clientes con peaje 2.0TD",
+      "web": "https://www.energianufri.com/es/tarifas-luz"
+    },
+    {
+      "compania": "Niba",
+      "nombre": "Niba Zen",
+      "energia": { "punta": 0.123, "llano": 0.123, "valle": 0.123 },
+      "potencia_kw_anio": { "punta": 33.215, "valle": 33.215 },
+      "nota": "Sin servicios adicionales obligatorios",
+      "web": "https://www.niba.es/enchufate50"
+    }
+  ],
+  "gas": []
+}
